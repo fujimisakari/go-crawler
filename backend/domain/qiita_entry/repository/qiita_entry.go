@@ -3,7 +3,7 @@ package reposiotry
 import (
 	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry"
 	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/entity"
-	"github.com/fujimisakari/go-crawler/backend/registry"
+	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type QiitaEntryRepository struct {
@@ -11,7 +11,7 @@ type QiitaEntryRepository struct {
 }
 
 func New() *QiitaEntryRepository {
-	return &QiitaEntryRepository{dao: registry.NewDAO().QiitaEntry()}
+	return &QiitaEntryRepository{dao: dao.New().QiitaEntry()}
 }
 
 func (r *QiitaEntryRepository) FindByID(hatenaHotEntryID int) (*entity.QiitaEntry, error) {

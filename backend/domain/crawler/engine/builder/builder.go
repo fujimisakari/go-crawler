@@ -6,18 +6,25 @@ import (
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/parser"
 )
 
-type (
-	HatenaHotEntryBuilder struct{}
-	QiitaEntryBuilder     struct{}
-)
+type Builder interface {
+	HatenaHotEntry() *engine.CrawlerEngine
+	QiitaEntry() *engine.CrawlerEngine
+}
 
-func (b HatenaHotEntryBuilder) BuildCrawlerEngine() *engine.CrawlerEngine {
+func New() Builder {
+	return builderImpl{}
+}
+
+type builderImpl struct{}
+
+
+func (b builderImpl) HatenaHotEntry() *engine.CrawlerEngine {
 	fetcher := fetcher.New(fetcher.HatenaHotEntryLogic{})
 	parsre := parser.New(parser.HatenaHotEntryLogic{})
 	return engine.New("HatenaHotEntryCrawler", fetcher, parsre)
 }
 
-func (b QiitaEntryBuilder) BuildCrawlerEngine() *engine.CrawlerEngine {
+func (b builderImpl) QiitaEntry() *engine.CrawlerEngine {
 	fetcher := fetcher.New(fetcher.QiitaEntryLogic{})
 	parsre := parser.New(parser.QiitaEntryLogic{})
 	return engine.New("QiitaEntryCrawler", fetcher, parsre)

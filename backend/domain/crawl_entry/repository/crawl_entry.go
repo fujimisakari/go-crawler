@@ -3,7 +3,7 @@ package reposiotry
 import (
 	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry"
 	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry/entity"
-	"github.com/fujimisakari/go-crawler/backend/registry"
+	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type CrawlEntryRepository struct {
@@ -11,7 +11,7 @@ type CrawlEntryRepository struct {
 }
 
 func New() *CrawlEntryRepository {
-	return &CrawlEntryRepository{dao: registry.NewDAO().CrawlEntry()}
+	return &CrawlEntryRepository{dao: dao.New().CrawlEntry()}
 }
 
 func (r *CrawlEntryRepository) Find(limit int) (*entity.CrawlEntryList, error) {

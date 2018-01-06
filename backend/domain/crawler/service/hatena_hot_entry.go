@@ -5,19 +5,19 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/builder"
+	crawler_builder "github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/builder"
 	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
 )
 
 func CrawlHatenaHotEntry(crawlEntryID int) (*entity.HatenaHotEntryList, error) {
-	crawlerEngine := builder.HatenaHotEntryBuilder{}.BuildCrawlerEngine()
+	crawler := crawler_builder.New().HatenaHotEntry()
 
-	fmt.Printf("Start: %s\n", crawlerEngine.Name)
-	entries, err := crawlerEngine.Run()
+	fmt.Printf("Start: %s\n", crawler.Name)
+	entries, err := crawler.Run()
 	if err != nil {
 		return nil, errors.Wrap(err, "hatena hotentry crawl error")
 	}
-	
+
 	entities := []*entity.HatenaHotEntry{}
 	for _, entry := range entries {
 		params := map[string]interface{}{

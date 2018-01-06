@@ -3,7 +3,7 @@ package reposiotry
 import (
 	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry"
 	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
-	"github.com/fujimisakari/go-crawler/backend/registry"
+	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type HatenaHotEntryRepository struct {
@@ -11,7 +11,7 @@ type HatenaHotEntryRepository struct {
 }
 
 func New() *HatenaHotEntryRepository {
-	return &HatenaHotEntryRepository{dao: registry.NewDAO().HatenaHotEntry()}
+	return &HatenaHotEntryRepository{dao: dao.New().HatenaHotEntry()}
 }
 
 func (r *HatenaHotEntryRepository) FindByID(hatenaHotEntryID int) (*entity.HatenaHotEntry, error) {

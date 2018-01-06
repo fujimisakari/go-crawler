@@ -1,4 +1,4 @@
-package registry
+package dao
 
 import (
 	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry"
@@ -13,20 +13,20 @@ type DAO interface {
 	QiitaEntry() qiita_entry.QiitaEntryDAO
 }
 
-func NewDAO() DAO {
-	return &daoImpl{}
+func New() DAO {
+	return daoImpl{}
 }
 
 type daoImpl struct{}
 
-func (r *daoImpl) CrawlEntry() crawl_entry.CrawlEntryDAO {
+func (d daoImpl) CrawlEntry() crawl_entry.CrawlEntryDAO {
 	return &db.CrawlEntryDAO{Cnn: db.SharedInstance().Connection}
 }
 
-func (r *daoImpl) HatenaHotEntry() hatena_hotentry.HatenaHotEntryDAO {
+func (d daoImpl) HatenaHotEntry() hatena_hotentry.HatenaHotEntryDAO {
 	return &db.HatenaHotEntryDAO{Cnn: db.SharedInstance().Connection}
 }
 
-func (r *daoImpl) QiitaEntry() qiita_entry.QiitaEntryDAO {
+func (d daoImpl) QiitaEntry() qiita_entry.QiitaEntryDAO {
 	return &db.QiitaEntryDAO{Cnn: db.SharedInstance().Connection}
 }
