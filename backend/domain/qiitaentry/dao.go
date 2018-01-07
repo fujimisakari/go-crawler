@@ -1,7 +1,7 @@
-package qiita_entry
+package qiitaentry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/entity"
 )
 
 type QiitaEntryDAO interface {

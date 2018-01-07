@@ -1,13 +1,13 @@
 package reposiotry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry"
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/entity"
 	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type QiitaEntryRepository struct {
-	dao qiita_entry.QiitaEntryDAO
+	dao qiitaentry.QiitaEntryDAO
 }
 
 func New() *QiitaEntryRepository {

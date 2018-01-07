@@ -5,12 +5,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	crawler_builder "github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/builder"
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/entity"
 )
 
 func CrawlHatenaHotEntry(crawlEntryID int) (*entity.HatenaHotEntryList, error) {
-	crawler := crawler_builder.New().HatenaHotEntry()
+	crawler := engine.NewCrawlerBuilder().HatenaHotEntry()
 
 	fmt.Printf("Start: %s\n", crawler.Name)
 	entries, err := crawler.Run()

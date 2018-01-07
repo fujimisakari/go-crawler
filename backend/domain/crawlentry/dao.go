@@ -1,4 +1,4 @@
-package crawl_entry
+package crawlentry
 
 type CrawlEntryDAO interface {
 	Select(limit int) ([]map[string]interface{}, error)

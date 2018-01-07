@@ -1,16 +1,16 @@
 package dao
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry"
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry"
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry"
 	"github.com/fujimisakari/go-crawler/backend/infrastracture/db"
 )
 
 type DAO interface {
-	CrawlEntry() crawl_entry.CrawlEntryDAO
-	HatenaHotEntry() hatena_hotentry.HatenaHotEntryDAO
-	QiitaEntry() qiita_entry.QiitaEntryDAO
+	CrawlEntry() crawlentry.CrawlEntryDAO
+	HatenaHotEntry() hatenahotentry.HatenaHotEntryDAO
+	QiitaEntry() qiitaentry.QiitaEntryDAO
 }
 
 func New() DAO {
@@ -19,14 +19,14 @@ func New() DAO {
 
 type daoImpl struct{}
 
-func (d daoImpl) CrawlEntry() crawl_entry.CrawlEntryDAO {
+func (d daoImpl) CrawlEntry() crawlentry.CrawlEntryDAO {
 	return &db.CrawlEntryDAO{Cnn: db.SharedInstance().Connection}
 }
 
-func (d daoImpl) HatenaHotEntry() hatena_hotentry.HatenaHotEntryDAO {
+func (d daoImpl) HatenaHotEntry() hatenahotentry.HatenaHotEntryDAO {
 	return &db.HatenaHotEntryDAO{Cnn: db.SharedInstance().Connection}
 }
 
-func (d daoImpl) QiitaEntry() qiita_entry.QiitaEntryDAO {
+func (d daoImpl) QiitaEntry() qiitaentry.QiitaEntryDAO {
 	return &db.QiitaEntryDAO{Cnn: db.SharedInstance().Connection}
 }

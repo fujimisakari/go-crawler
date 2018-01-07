@@ -12,7 +12,7 @@ type CrawlerEngine struct {
 	parseEngine *parser.ParseEngine
 }
 
-func New(name string, fetchEngine *fetcher.FetchEngine, parseEngine *parser.ParseEngine) *CrawlerEngine {
+func NewCrawlerEngine(name string, fetchEngine *fetcher.FetchEngine, parseEngine *parser.ParseEngine) *CrawlerEngine {
 	return &CrawlerEngine{
 		Name:        name,
 		fetchEngine: fetchEngine,

@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/entity"
 )
 
 type QiitaEntryDAO struct {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/entity"
 )
 
 type HatenaHotEntryDAO struct {

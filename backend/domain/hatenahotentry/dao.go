@@ -1,7 +1,7 @@
-package hatena_hotentry
+package hatenahotentry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/entity"
 )
 
 type HatenaHotEntryDAO interface {

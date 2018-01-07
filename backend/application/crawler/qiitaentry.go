@@ -4,17 +4,17 @@ import (
 	"log"
 	"time"
 
-	crawler_sv "github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
 
-	crawl_entry_repo "github.com/fujimisakari/go-crawler/backend/domain/crawl_entry/repository"
-	qiita_entry_repo "github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/repository"
+	crawlentryrepo "github.com/fujimisakari/go-crawler/backend/domain/crawlentry/repository"
+	qiitaentryrepo "github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/repository"
 )
 
 type QiitaEntryCrawler struct{}
 
 func (c QiitaEntryCrawler) Crawl() {
-	crawlEntryRepo := crawl_entry_repo.New()
-	qiitaEntryRepo := qiita_entry_repo.New()
+	crawlEntryRepo := crawlentryrepo.New()
+	qiitaEntryRepo := qiitaentryrepo.New()
 
 	crawlDate := time.Now().Format("2006-01-02")
 	crawlEntry, err := crawlEntryRepo.FindOrCreateByDate(crawlDate)
@@ -24,7 +24,7 @@ func (c QiitaEntryCrawler) Crawl() {
 	}
 
 	// Crawling
-	qiitaEntryList, err := crawler_sv.CrawlQiitaEntry(crawlEntry.ID)
+	qiitaEntryList, err := service.CrawlQiitaEntry(crawlEntry.ID)
 	if err != nil {
 		log.Fatal(err)
 		return

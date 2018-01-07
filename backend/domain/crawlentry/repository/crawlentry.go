@@ -1,13 +1,13 @@
 package reposiotry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry"
-	"github.com/fujimisakari/go-crawler/backend/domain/crawl_entry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry/entity"
 	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type CrawlEntryRepository struct {
-	dao crawl_entry.CrawlEntryDAO
+	dao crawlentry.CrawlEntryDAO
 }
 
 func New() *CrawlEntryRepository {

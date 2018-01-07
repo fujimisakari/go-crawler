@@ -5,12 +5,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	crawler_builder "github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/builder"
-	"github.com/fujimisakari/go-crawler/backend/domain/qiita_entry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/entity"
 )
 
 func CrawlQiitaEntry(crawlEntryID int) (*entity.QiitaEntryList, error) {
-	crawler := crawler_builder.New().QiitaEntry()
+	crawler := engine.NewCrawlerBuilder().QiitaEntry()
 
 	fmt.Printf("Start: %s\n", crawler.Name)
 	entries, err := crawler.Run()

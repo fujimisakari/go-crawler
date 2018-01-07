@@ -1,13 +1,13 @@
 package reposiotry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry"
-	"github.com/fujimisakari/go-crawler/backend/domain/hatena_hotentry/entity"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/entity"
 	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
 type HatenaHotEntryRepository struct {
-	dao hatena_hotentry.HatenaHotEntryDAO
+	dao hatenahotentry.HatenaHotEntryDAO
 }
 
 func New() *HatenaHotEntryRepository {
