@@ -1,20 +1,18 @@
-package reposiotry
+package crawlentry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
 	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry/entity"
-	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
-type CrawlEntryRepository struct {
-	dao crawlentry.CrawlEntryDAO
+type Repository struct {
+	dao DAO
 }
 
-func New() *CrawlEntryRepository {
-	return &CrawlEntryRepository{dao: dao.New().CrawlEntry()}
+func NewRepository() *Repository {
+	return &Repository{dao: newDAO()}
 }
 
-func (r *CrawlEntryRepository) Find(limit int) (*entity.CrawlEntryList, error) {
+func (r *Repository) Find(limit int) (*entity.CrawlEntryList, error) {
 	rows, err := r.dao.Select(limit)
 	if err != nil {
 		return nil, err
@@ -27,7 +25,7 @@ func (r *CrawlEntryRepository) Find(limit int) (*entity.CrawlEntryList, error) {
 	return entity.NewCrawlEntryList(entitis), nil
 }
 
-func (r *CrawlEntryRepository) FindOrCreateByDate(date string) (*entity.CrawlEntry, error) {
+func (r *Repository) FindOrCreateByDate(date string) (*entity.CrawlEntry, error) {
 	// Find
 	row, err := r.dao.SelectByDate(date)
 	if err != nil {

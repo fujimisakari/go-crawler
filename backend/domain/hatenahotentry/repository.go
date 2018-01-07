@@ -1,20 +1,18 @@
-package reposiotry
+package hatenahotentry
 
 import (
-	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry"
 	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/entity"
-	"github.com/fujimisakari/go-crawler/backend/registry/dao"
 )
 
-type HatenaHotEntryRepository struct {
-	dao hatenahotentry.HatenaHotEntryDAO
+type Repository struct {
+	dao DAO
 }
 
-func New() *HatenaHotEntryRepository {
-	return &HatenaHotEntryRepository{dao: dao.New().HatenaHotEntry()}
+func NewRepository() *Repository {
+	return &Repository{dao: newDAO()}
 }
 
-func (r *HatenaHotEntryRepository) FindByID(hatenaHotEntryID int) (*entity.HatenaHotEntry, error) {
+func (r *Repository) FindByID(hatenaHotEntryID int) (*entity.HatenaHotEntry, error) {
 	row, err := r.dao.SelectByID(hatenaHotEntryID)
 	if err != nil {
 		return nil, err
@@ -22,7 +20,7 @@ func (r *HatenaHotEntryRepository) FindByID(hatenaHotEntryID int) (*entity.Haten
 	return toEntity(row), nil
 }
 
-func (r *HatenaHotEntryRepository) FindByCrawlEntryID(crawlEntryID int) (*entity.HatenaHotEntryList, error) {
+func (r *Repository) FindByCrawlEntryID(crawlEntryID int) (*entity.HatenaHotEntryList, error) {
 	rows, err := r.dao.SelectByCrawlEntryID(crawlEntryID)
 	if err != nil {
 		return nil, err
@@ -36,7 +34,7 @@ func (r *HatenaHotEntryRepository) FindByCrawlEntryID(crawlEntryID int) (*entity
 	return entity.NewHatenaHotEntryList(entitis), nil
 }
 
-func (r *HatenaHotEntryRepository) BulkCreate(hatenaHotEntryList *entity.HatenaHotEntryList) error {
+func (r *Repository) BulkCreate(hatenaHotEntryList *entity.HatenaHotEntryList) error {
 	err := r.dao.BulkInsert(hatenaHotEntryList)
 	if err != nil {
 		return err
@@ -44,7 +42,7 @@ func (r *HatenaHotEntryRepository) BulkCreate(hatenaHotEntryList *entity.HatenaH
 	return nil
 }
 
-func (r *HatenaHotEntryRepository) DeleteByCrawlEntryID(crawlEntryID int) error {
+func (r *Repository) DeleteByCrawlEntryID(crawlEntryID int) error {
 	err := r.dao.DeleteByCrawlEntryID(crawlEntryID)
 	if err != nil {
 		return err

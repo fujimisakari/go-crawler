@@ -6,15 +6,15 @@ import (
 
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
 
-	crawlentryrepo "github.com/fujimisakari/go-crawler/backend/domain/crawlentry/repository"
-	hatenahotentryrepo "github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry/repository"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry"
 )
 
 type HatenaHotEntryCrawler struct{}
 
 func (c HatenaHotEntryCrawler) Crawl() {
-	crawlEntryRepo := crawlentryrepo.New()
-	hatenaHotEntryRepo := hatenahotentryrepo.New()
+	crawlEntryRepo := crawlentry.NewRepository()
+	hatenaHotEntryRepo := hatenahotentry.NewRepository()
 
 	crawlDate := time.Now().Format("2006-01-02")
 	crawlEntry, err := crawlEntryRepo.FindOrCreateByDate(crawlDate)

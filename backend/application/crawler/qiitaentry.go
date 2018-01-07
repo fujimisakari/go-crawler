@@ -6,15 +6,15 @@ import (
 
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
 
-	crawlentryrepo "github.com/fujimisakari/go-crawler/backend/domain/crawlentry/repository"
-	qiitaentryrepo "github.com/fujimisakari/go-crawler/backend/domain/qiitaentry/repository"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/qiitaentry"
 )
 
 type QiitaEntryCrawler struct{}
 
 func (c QiitaEntryCrawler) Crawl() {
-	crawlEntryRepo := crawlentryrepo.New()
-	qiitaEntryRepo := qiitaentryrepo.New()
+	crawlEntryRepo := crawlentry.NewRepository()
+	qiitaEntryRepo := qiitaentry.NewRepository()
 
 	crawlDate := time.Now().Format("2006-01-02")
 	crawlEntry, err := crawlEntryRepo.FindOrCreateByDate(crawlDate)
