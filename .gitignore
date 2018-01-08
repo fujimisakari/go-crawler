@@ -1,1 +1,4 @@
 go-crawler
+vendor
+bin
+.docker-env
