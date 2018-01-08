@@ -6,6 +6,6 @@ import (
 
 func Serve() {
 	e := echo.New()
-	routing(e)
+	setRoute(e)
 	e.Logger.Fatal(e.Start(":8000"))
 }

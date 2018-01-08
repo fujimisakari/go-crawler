@@ -17,3 +17,13 @@ func NewHatenaHotEntry(params map[string]interface{}) *HatenaHotEntry {
 		Description:  params["description"].(string),
 	}
 }
+
+func (e *HatenaHotEntry) ToSchemaData() map[string]interface{} {
+	schemaData := map[string]interface{}{
+		"id":          e.ID,
+		"title":       e.Title,
+		"link":        e.Link,
+		"description": e.Description,
+	}
+	return schemaData
+}

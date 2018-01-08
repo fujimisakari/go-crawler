@@ -14,8 +14,16 @@ func NewHatenaHotEntryList(items []*HatenaHotEntry) *HatenaHotEntryList {
 	}
 }
 
-func (h *HatenaHotEntryList) PrintOut() {
-	for _, item := range h.Items {
+func (e *HatenaHotEntryList) ToSchemaData() []map[string]interface{} {
+	schemaDatas := []map[string]interface{}{}
+	for _, item := range e.Items {
+		schemaDatas = append(schemaDatas, item.ToSchemaData())
+	}
+	return schemaDatas
+}
+
+func (e *HatenaHotEntryList) PrintOut() {
+	for _, item := range e.Items {
 		fmt.Println("===============================")
 		fmt.Println(item.Title)
 		fmt.Println(item.Link)
