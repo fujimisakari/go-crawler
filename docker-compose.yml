@@ -1,0 +1,45 @@
+app:
+  container_name: "go-crawler-app"
+  image: go-crawler-app
+  restart: always
+  env_file: .docker-env
+  environment:
+    APPENV: development
+  ports:
+    - "8000:8000"
+  links:
+    - mysql:mysql
+    - redis:redis
+  volumes:
+    - .:/go/src/github.com/fujimisakari/go-crawler
+    - /var/run
+  volumes_from:
+    - storage
+mysql:
+  container_name: "go-crawler-mysql"
+  image: mysql:5.7
+  restart: always
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    - TZ=Asia/Tokyo
+  volumes:
+    - ./docker/mysql/charset.cnf:/etc/mysql/conf.d/charset.cnf
+  volumes_from:
+    - storage
+redis:
+  container_name: "go-crawler-redis"
+  image: redis:latest
+  restart: always
+  ports:
+    - "6379:6379"
+  volumes_from:
+    - storage
+  command: redis-server --appendonly yes
+storage:
+  container_name: "go-crawler-storage"
+  image: busybox:latest
+  volumes:
+    - /var/lib/mysql
+    - /data
