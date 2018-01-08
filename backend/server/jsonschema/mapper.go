@@ -1,10 +1,5 @@
 package jsonschema
 
-type APISchema interface {
-	getRequestSchema() map[string]interface{}
-	getResponseSchema() map[string]interface{}
-}
-
 var schemaMapper = map[string]interface{}{
 	"hatena_hotentry_detail/:id": new(HatenaHotEntryDetailAPISchema),
 }

@@ -11,6 +11,11 @@ import (
 	"github.com/xeipuuv/gojsonschema"
 )
 
+type APISchema interface {
+	getRequestSchema() map[string]interface{}
+	getResponseSchema() map[string]interface{}
+}
+
 func JSONSchemaHandler() echo.MiddlewareFunc {
 
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
