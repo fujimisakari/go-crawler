@@ -9,10 +9,10 @@ help:
 	@echo "  make migrate cmd=[up|down]      # execute migration."
 
 build:
-	go build -o ./bin/go-clawler
+	go build -o ./bin/go-crawler
 
 server:
-	./bin/go-clawler server
+	./bin/go-crawler server
 
 migrate:
 	migrate -path=./backend/infrastracture/migrations -database 'mysql://$(DB_USER):$(DB_PASSWORD)@tcp($(DATABASE_URL):3306)/$(DB_NAME)' $(cmd)
