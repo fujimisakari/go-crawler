@@ -1,7 +1,6 @@
 package api
 
 import (
-	"net/http"
 	"strconv"
 
 	"github.com/labstack/echo"
@@ -39,9 +38,4 @@ func HatenaHotEntryDetail(c echo.Context) error {
 	}
 	c.Set("context", context)
 	return nil
-}
-
-func QiitaEntry(c echo.Context) error {
-	date := c.Param("date")
-	return c.String(http.StatusOK, date)
 }

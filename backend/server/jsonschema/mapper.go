@@ -1,8 +1,10 @@
 package jsonschema
 
 var schemaMapper = map[string]interface{}{
-	"hatena_hotentry/:date": new(HatenaHotEntryAPISchema),
+	"hatena_hotentry/:date":      new(HatenaHotEntryAPISchema),
 	"hatena_hotentry_detail/:id": new(HatenaHotEntryDetailAPISchema),
+	"qiita_entry/:date":          new(QiitaEntryAPISchema),
+	"qiita_entry_detail/:id":     new(QiitaEntryDetailAPISchema),
 }
 
 func getSchemaMapper() map[string]interface{} {

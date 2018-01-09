@@ -14,8 +14,16 @@ func NewQiitaEntryList(items []*QiitaEntry) *QiitaEntryList {
 	}
 }
 
-func (q *QiitaEntryList) PrintOut() {
-	for _, item := range q.Items {
+func (e *QiitaEntryList) ToSchemaData() []map[string]interface{} {
+	schemaDatas := []map[string]interface{}{}
+	for _, item := range e.Items {
+		schemaDatas = append(schemaDatas, item.ToSchemaData())
+	}
+	return schemaDatas
+}
+
+func (e *QiitaEntryList) PrintOut() {
+	for _, item := range e.Items {
 		fmt.Println("===============================")
 		fmt.Println(item.PostedAt)
 		fmt.Println(item.User)

@@ -23,3 +23,15 @@ func NewQiitaEntry(params map[string]interface{}) *QiitaEntry {
 		PostedAt:     params["postedAt"].(time.Time),
 	}
 }
+
+func (e *QiitaEntry) ToSchemaData() map[string]interface{} {
+	layout := "2006-01-02 15:04:05"
+	schemaData := map[string]interface{}{
+		"id":        e.ID,
+		"user":      e.User,
+		"title":     e.Title,
+		"link":      e.Link,
+		"posted_at": e.PostedAt.Format(layout),
+	}
+	return schemaData
+}

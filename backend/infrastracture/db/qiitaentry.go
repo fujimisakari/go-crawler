@@ -58,6 +58,7 @@ func (r *QiitaEntryDAO) SelectByCrawlEntryID(crawlEntryID int) ([]map[string]int
 		row := map[string]interface{}{
 			"id":           id,
 			"crawlEntryID": crawlEntryID,
+			"user":         user,
 			"title":        title,
 			"link":         link,
 			"postedAt":     postedAt,
