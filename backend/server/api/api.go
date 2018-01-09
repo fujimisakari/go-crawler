@@ -11,7 +11,16 @@ import (
 
 func HatenaHotEntryList(c echo.Context) error {
 	date := c.Param("date")
-	return c.String(http.StatusOK, date)
+	hatenaHotEntryList, err := hatenahotentry.GetListByDate(date)
+	if err != nil {
+		return err
+	}
+
+	context := map[string]interface{}{
+		"hatena_hotentries": hatenaHotEntryList.ToSchemaData(),
+	}
+	c.Set("context", context)
+	return nil
 }
 
 func HatenaHotEntryDetail(c echo.Context) error {
