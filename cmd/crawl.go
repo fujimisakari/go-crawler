@@ -35,5 +35,6 @@ func crawl(cmd *cobra.Command, args []string) {
 
 func outputCrawlErrorMsg(msg string) {
 	crawlingTargets := strings.Join(app.GetCmdNameList(), ", ")
-	fmt.Print(fmt.Sprintf("Target: %s", crawlingTargets))
+	fmt.Println(msg)
+	fmt.Println(fmt.Sprintf("Target: %s", crawlingTargets))
 }
