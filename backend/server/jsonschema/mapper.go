@@ -1,6 +1,7 @@
 package jsonschema
 
 var schemaMapper = map[string]interface{}{
+	"crawl/:date":                new(CrawlAggregateAPISchema),
 	"hatena_hotentry/:date":      new(HatenaHotEntryAPISchema),
 	"hatena_hotentry_detail/:id": new(HatenaHotEntryDetailAPISchema),
 	"qiita_entry/:date":          new(QiitaEntryAPISchema),
