@@ -23,6 +23,7 @@ func setRoute(e *echo.Echo) {
 	// Set Custom MiddleWare
 	apiGroup.Use(jsonschema.JSONSchemaHandler())
 	{
+		apiGroup.GET("/crawl_entry", api.CrawlEntry)
 		apiGroup.GET("/crawl/:date", api.CrawlAggregate)
 		apiGroup.GET("/hatena_hotentry/:date", api.HatenaHotEntryList)
 		apiGroup.GET("/hatena_hotentry_detail/:id", api.HatenaHotEntryDetail)

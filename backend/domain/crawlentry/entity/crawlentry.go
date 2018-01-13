@@ -11,3 +11,11 @@ func NewCrawlEntry(params map[string]interface{}) *CrawlEntry {
 		Date: params["date"].(string),
 	}
 }
+
+func (e *CrawlEntry) ToSchemaData() map[string]interface{} {
+	schemaData := map[string]interface{}{
+		"id":    e.ID,
+		"title": e.Date,
+	}
+	return schemaData
+}
