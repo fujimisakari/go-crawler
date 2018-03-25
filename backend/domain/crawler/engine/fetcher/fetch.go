@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/response"
 	"github.com/pkg/errors"
 )
 
@@ -24,12 +25,13 @@ type FetchEngine struct {
 	logic FetchEngineLogic
 }
 
-func (f FetchEngine) Fetch() ([]byte, error) {
+func (f FetchEngine) Fetch(res chan<- *response.Response) {
 	method := f.logic.getHttpMethod()
 	url := f.logic.getCrawlUrl()
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
-		return nil, errors.Wrap(err, "fetch request create error")
+		res <- response.New(nil, errors.Wrap(err, "fetch request create error"))
+		return
 	}
 	headers := f.logic.getHeaders()
 	for k, v := range headers {
@@ -39,13 +41,15 @@ func (f FetchEngine) Fetch() ([]byte, error) {
 	client := http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, errors.Wrap(err, "fetch request error")
+		res <- response.New(nil, errors.Wrap(err, "fetch request error"))
+		return
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, errors.Wrap(err, "fetch response read error")
+		res <- response.New(nil, errors.Wrap(err, "fetch response read error"))
+		return
 	}
-	return body, nil
+	res <- response.New(body, nil)
 }

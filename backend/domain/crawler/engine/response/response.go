@@ -2,16 +2,23 @@ package response
 
 import (
 	"encoding/json"
+
 	"github.com/pkg/errors"
 )
 
 type Response struct {
 	Content []byte
+	Err     error
 }
 
-func New(content []byte) *Response {
+func NewChanel() chan *Response {
+	return make(chan *Response)
+}
+
+func New(content []byte, err error) *Response {
 	return &Response{
 		Content: content,
+		Err:     err,
 	}
 }
 

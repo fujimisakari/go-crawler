@@ -4,6 +4,7 @@ import (
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/fetcher"
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/parser"
 	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/response"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/engine/result"
 )
 
 type CrawlerEngine struct {
@@ -20,15 +21,20 @@ func NewCrawlerEngine(name string, fetchEngine *fetcher.FetchEngine, parseEngine
 	}
 }
 
-func (c *CrawlerEngine) Run() ([]map[string]interface{}, error) {
-	content, err := c.fetchEngine.Fetch()
-	if err != nil {
-		return nil, err
+func (c *CrawlerEngine) Run(cDone chan<- *result.CrawlResult) {
+	rDone := response.NewChanel()
+	defer close(rDone)
+
+	go c.fetchEngine.Fetch(rDone)
+	res := <-rDone
+	if res.Err != nil {
+		cDone <- result.New(nil, res.Err)
+		return
 	}
-	response := response.New(content)
-	entries, err := c.parseEngine.Parse(response)
+	entries, err := c.parseEngine.Parse(res)
 	if err != nil {
-		return nil, err
+		cDone <- result.New(nil, res.Err)
+		return
 	}
-	return entries, nil
+	cDone <- result.New(entries, nil)
 }

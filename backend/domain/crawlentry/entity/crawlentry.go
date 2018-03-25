@@ -15,7 +15,7 @@ func NewCrawlEntry(params map[string]interface{}) *CrawlEntry {
 func (e *CrawlEntry) ToSchemaData() map[string]interface{} {
 	schemaData := map[string]interface{}{
 		"id":    e.ID,
-		"title": e.Date,
+		"date": e.Date,
 	}
 	return schemaData
 }
