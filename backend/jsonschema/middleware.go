@@ -16,7 +16,7 @@ type APISchema interface {
 	getResponseSchema() map[string]interface{}
 }
 
-func JSONSchemaHandler() echo.MiddlewareFunc {
+func Handler() echo.MiddlewareFunc {
 
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return echo.HandlerFunc(func(c echo.Context) error {

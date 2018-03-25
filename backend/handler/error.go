@@ -1,4 +1,4 @@
-package server
+package handler
 
 import (
 	"net/http"
@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-func JSONHTTPErrorHandler(err error, c echo.Context) {
+func JSONHTTPError(err error, c echo.Context) {
 	code := http.StatusInternalServerError
 	msg := "Internal Server Error"
 	if he, ok := err.(*echo.HTTPError); ok {

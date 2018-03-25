@@ -4,8 +4,8 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
-	"github.com/fujimisakari/go-crawler/backend/server/api"
-	"github.com/fujimisakari/go-crawler/backend/server/jsonschema"
+	"github.com/fujimisakari/go-crawler/backend/handler"
+	"github.com/fujimisakari/go-crawler/backend/jsonschema"
 )
 
 func setRoute(e *echo.Echo) {
@@ -16,18 +16,18 @@ func setRoute(e *echo.Echo) {
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAcceptEncoding},
 	}))
-	e.HTTPErrorHandler = JSONHTTPErrorHandler
+	e.HTTPErrorHandler = handler.JSONHTTPError
 
 	// Routes
 	apiGroup := e.Group("/api")
 	// Set Custom MiddleWare
-	apiGroup.Use(jsonschema.JSONSchemaHandler())
+	apiGroup.Use(jsonschema.Handler())
 	{
-		apiGroup.GET("/crawl_entry", api.CrawlEntry)
-		apiGroup.GET("/crawl/:date", api.CrawlAggregate)
-		apiGroup.GET("/hatena_hotentry/:date", api.HatenaHotEntryList)
-		apiGroup.GET("/hatena_hotentry_detail/:id", api.HatenaHotEntryDetail)
-		apiGroup.GET("/qiita_entry/:date", api.QiitaEntryList)
-		apiGroup.GET("/qiita_entry_detail/:id", api.QiitaEntryDetail)
+		apiGroup.GET("/crawl_entry", handler.CrawlEntry)
+		apiGroup.GET("/crawl/:date", handler.CrawlAggregate)
+		apiGroup.GET("/hatena_hotentry/:date", handler.HatenaHotEntryList)
+		apiGroup.GET("/hatena_hotentry_detail/:id", handler.HatenaHotEntryDetail)
+		apiGroup.GET("/qiita_entry/:date", handler.QiitaEntryList)
+		apiGroup.GET("/qiita_entry_detail/:id", handler.QiitaEntryDetail)
 	}
 }

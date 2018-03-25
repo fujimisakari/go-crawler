@@ -1,4 +1,4 @@
-package api
+package handler
 
 import (
 	"strconv"
@@ -15,7 +15,6 @@ func QiitaEntryList(c echo.Context) error {
 		return err
 	}
 
-	
 	context := map[string]interface{}{
 		"qiita_entries": qiitaEntryList.ToSchemaData(),
 	}
