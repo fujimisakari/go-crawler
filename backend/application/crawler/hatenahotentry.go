@@ -4,9 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
-
 	"github.com/fujimisakari/go-crawler/backend/domain/crawlentry"
+	"github.com/fujimisakari/go-crawler/backend/domain/crawler/service"
 	"github.com/fujimisakari/go-crawler/backend/domain/hatenahotentry"
 )
 

@@ -16,7 +16,6 @@ func NewCrawlerBuilder() CrawlerBuilder {
 
 type builderImpl struct{}
 
-
 func (b builderImpl) HatenaHotEntry() *CrawlerEngine {
 	fetcher := fetcher.New(fetcher.HatenaHotEntryLogic{})
 	parsre := parser.New(parser.HatenaHotEntryLogic{})
